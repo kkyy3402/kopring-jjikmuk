@@ -1,5 +1,7 @@
 package example.kopring.kopring.apis.user.dtos
 
+import example.kopring.kopring.apis.todo.dtos.TodoDto
+import example.kopring.kopring.apis.todo.entity.toDto
 import example.kopring.kopring.apis.user.entities.UserEntity
 import java.time.LocalDateTime
 
@@ -9,6 +11,7 @@ data class UserDto(
     val address: String? = null,
     val createdAt: LocalDateTime? = null,
     val updatedAt: LocalDateTime? = null,
+    val todos: List<TodoDto>?
 ) {
     companion object {
         fun fromEntity(entity: UserEntity): UserDto {
@@ -17,7 +20,8 @@ data class UserDto(
                 userName = entity.userName,
                 address = entity.address,
                 createdAt = entity.createdAt,
-                updatedAt = entity.updatedAt
+                updatedAt = entity.updatedAt,
+                todos = entity.todos.map { it.toDto(entity.userId) }
             )
         }
     }

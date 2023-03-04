@@ -19,7 +19,7 @@ class UserService(private val userRepository: UserRepository) {
         if (findUser.isEmpty) {
             throw UserNotFoundException()
         }
-
+        
         return UserDto.fromEntity(findUser.get())
     }
 
